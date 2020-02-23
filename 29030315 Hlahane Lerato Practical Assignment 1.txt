@@ -1,0 +1,181 @@
+CREATE DATABASE BidvestBank;
+
+USE BidvestBank;
+
+CREATE TABLE BankBranch(
+	id int(11) unsigned auto_increment primary key not null,
+	branch_name varchar(30) not null,
+	branch_city varchar(30) not null,
+	assets double not null
+);
+
+describe BankBranch;
+
+
+CREATE TABLE Customer(
+	id int(11) unsigned auto_increment primary key not null,
+	customer_name varchar(30) not null,
+	customer_street varchar(30) not null,
+	customer_city varchar(30) not null
+);
+
+describe Customer;
+
+
+CREATE TABLE CustomerAccount(
+account_number char(6) not null primary key,
+branch_name varchar(15) not null,
+balance double
+);
+
+describe CustomerAccount;
+
+
+CREATE TABLE Loan(
+loan_number varchar(5) not null primary key,
+branch_name varchar(30) not null,
+amount double
+);
+
+describe Loan;
+
+
+CREATE TABLE Depositor(
+account_number char(6) not null primary key,
+customer_name varchar(30) not null
+);
+
+Describe Depositor;
+
+
+CREATE TABLE Borrower(
+loan_number varchar(30) not null primary key,
+customer_name varchar(30) not null
+);
+
+describe Borrower;
+
+CREATE TABLE Employee(
+id int(11) unsigned auto_increment primary key not null,
+employee_name varchar(30) not null,
+branch_name varchar(30) not null,
+salary double
+);
+
+describe Employee;
+
+
+INSERT INTO BankBranch(branch_name, branch_city, assets)
+	values
+	('Midrand', 'Johannesburg', 7100000),
+	('Newtown', 'Johannesburg', 9000000),
+	('Mabopane', 'Pretoria', 400000),
+	('Belgravia', 'Kimberly', 3700000),
+	('Sunnyside', 'Pretoria', 1700000),
+	('Amanzimtoti', 'Durban', 300000),
+	('Universitas', 'Bloemfontein', 2100000),
+	('Mamelodi', 'Pretoria', 8000000);
+
+	select * from BankBranch;
+
+
+INSERT INTO Customer(customer_name, customer_street, customer_city)
+	values
+	('Modise', 'Spring', 'George'),
+	('Brooks', 'Senator', 'Johannesburg'),
+	('Jooste', 'North', 'Kimberly'),
+	('Lombard', 'Sand Hill', 'Nelspruit'),
+	('Mokwena', 'Walnut', 'Port-Elizabeth'),
+	('Johnson', 'Mmabatho', 'Mafikeng'),
+	('Johnson', 'Alma', 'Bloemfontein'),
+	('Zwane', 'Main', 'Mafikeng'),
+	('Lindsay', 'Park', 'George'),
+	('Smith', 'North', 'Kimberly'),
+	('Dlamini', 'Putnam', 'Port-Elizabeth'),
+	('Williams', 'Nassau', 'Giyane');
+
+	select * from Customer;
+
+	
+INSERT INTO CustomerAccount(account_number, branch_name, balance)
+	values
+	('A-5324', 'Newtown', 500),
+	('A-5624', 'Sunnyside', 400),
+	('A-7794', 'Midrand', 900),
+	('A-4467', 'Mabopane', 700),
+	('A-3546', 'Midrand', 750),
+	('A-3453', 'Universitas', 700),
+	('A-2542', 'Mamelodi', 350);
+
+	select * from CustomerAccount;
+
+
+INSERT INTO Loan(loan_number, branch_name, amount)
+	values
+	('L-11', 'Mamelodi', 900),
+	('L-14', 'Newtown', 1500),
+	('L-15', 'Sunnyside', 1500),
+	('L-16', 'Sunnyside', 1300),
+	('L-17', 'Newtown', 1000),
+	('L-23', 'Universitas', 2000),
+	('L-93', 'Mabopane', 500);
+
+	select * from Loan;
+
+
+INSERT INTO Depositor(account_number, customer_name)
+	values
+	('A-5624', 'Johnson'),
+	('A-7794', 'Johnson'),
+	('A-3546', 'Zwane'),
+	('A-3453', 'Lindsay'),
+	('A-4467', 'Smith'),
+	('A-2542', 'Dlamini');
+
+	select * from Depositor;
+
+	
+INSERT INTO Borrower(loan_number, customer_name)
+	values
+	('L-16', 'Modise'),
+	('L-93', 'Jooste'),
+	('L-15', 'Johnson'),
+	('L-14', 'Jackson'),
+	('L-17', 'Zwane'),
+	('L-11', 'Smith'),
+	('L-23', 'Smith'),
+	('L-21', 'Williams');
+
+	select * from Borrower;
+
+
+INSERT INTO Employee(employee_name, branch_name, salary)
+	values
+	('Modise', 'Sunnyside', 1500),
+	('Brown', 'Sunnyside', 1300),
+	('Gopal', 'Sunnyside', 5300),
+	('Johnson', 'Newtown', 1500),
+	('Loreena', 'Newtown', 1300),
+	('Peterson', 'Newtown', 2500),
+	('Rao', 'Austin', 1500),
+	('Sato', 'Austin', 1600);
+
+	select * from Employee;
+
+
+select * from CustomerAccount  where balance < 700;
+select * from Customer where customer_city = 'Johannesburg';
+select * from Employee where salary > 1500 and  not branch_name = 'Newtown';
+SELECT AVG(salary) FROM Employee;
+select max(assets) from BankBranch;
+
+
+
+Select * From Employee where branch_name = 'Sunnyside';
+select * from Borrower;
+Select * From CustomerAccount where balance > 900;
+Select * From CustomerAccount where branch_name = 'Newtown' and balance > 600;
+Select * From BankBranch;
+
+
+
